@@ -1,0 +1,78 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "chunk-norris"
+version = "0.1.0"
+description = "Evaluate and compare chunking strategies for RAG pipelines"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+authors = [
+  { name = "Harold Conley", email = "conley.harold@gmail.com" }
+]
+keywords = ["rag", "chunking", "llm", "evaluation", "nlp"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Text Processing :: Linguistic",
+]
+
+# TODO: add dependencies here as they are confirmed during development
+dependencies = [
+    "tiktoken==0.12.0",
+    "sentence-transformers==5.3.0",
+    "openpyxl==3.1.5",
+    "nltk==3.9.4",
+]
+
+[project.optional-dependencies]
+# TODO: add optional feature groups here as the project grows
+# Example:
+#   semantic = ["sentence-transformers>=2.7"]
+#   ragas    = ["ragas>=0.1"]
+
+# pip install chunk-norris[dev]
+dev = [
+  "pytest==9.0.2",
+  "pytest-cov==7.1.0",
+  "ruff>=0.4",
+  "mypy>=1.9",
+]
+
+[project.urls]
+Homepage = "https://github.com/HaroldConley/chunk-norris"
+Repository = "https://github.com/HaroldConley/chunk-norris"
+Issues = "https://github.com/HaroldConley/chunk-norris/issues"
+Changelog = "https://github.com/HaroldConley/chunk-norris/blob/main/CHANGELOG.md"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/chunk_norris"]
+
+# --- Ruff (linting + formatting) ---
+[tool.ruff]
+src = ["src"]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+# --- Mypy (type checking) ---
+[tool.mypy]
+python_version = "3.10"
+strict = true
+files = ["src"]
+
+# --- Pytest ---
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=src/chunk_norris --cov-report=term-missing"
