@@ -1,0 +1,124 @@
+Artemis II is an ongoing United States spaceflight mission sending four astronauts on a flyby around the Moon. It launched from Kennedy Space Center on April 1, 2026. The ten-day mission is crewed by NASA astronauts Reid Wiseman, Victor Glover, and Christina Koch, along with Canadian Space Agency astronaut Jeremy Hansen. It is the second flight of the Space Launch System SLS, the first crewed mission of the Orion spacecraft, and the first crewed mission beyond low Earth orbit since Apollo 17 in December 1972. The Orion spacecraft is currently past equidistance between the Earth and Moon.
+
+The mission is a test flight supporting subsequent Artemis missions aimed at returning humans to the lunar surface. Originally designated Exploration Mission-2 EM-2 and intended to support the now-canceled Asteroid Redirect Mission, its objectives were revised after the establishment of the Artemis program in 2017. Artemis II's mission objectives are similar to those of Apollo 8 in 1968, the first crewed lunar flight during the Apollo program. However, its planned free-return trajectory more closely resembles that flown by Apollo 13, although Artemis will fly much further away from the Moon.
+
+During the mission, Glover became the first person of color, Koch the first woman, Hansen the first non-U.S. citizen, and Wiseman the oldest person to travel beyond low Earth orbit and near the Moon. The mission is expected to set several human spaceflight records, including distance from Earth 252,757 miles 406,773 km 219,640 nmi; distance beyond the Moon about 4,700 miles 7,600 km 4,100 nmi; and velocity atmospheric reentry speed of about 25,000 miles per hour 40,000 km/h.
+
+History
+Mission planning and the launch date selection 2017–2021
+In 2017, Exploration Mission-2 was a projected single-launch mission of a Space Launch System SLS Block 1B rocket with an Exploration Upper Stage, lunar Block 1 Orion spacecraft, and a payload insertion of 50.7 tonnes 55.9 short tons 112,000 lb. The plan was to rendezvous with an asteroid previously placed in lunar orbit by the robotic Asteroid Redirect Mission and have astronauts perform spacewalks and gather samples.
+
+After the cancellation of the Asteroid Redirect Mission in April 2017, an 8-day mission was proposed with a crew of four astronauts, sent on a free-return trajectory around the Moon.
+
+Another proposal suggested in 2017 was to take four astronauts aboard Orion on an 8-to-21-day trip around the Moon to deliver the first element of the proposed Lunar Gateway space station. In March 2018, it was decided to launch the first Gateway module on a commercial launch vehicle because of delays in building the Mobile Launcher needed to hold the more powerful Exploration Upper Stage. The SpaceX Falcon Heavy was selected as the launcher. The Lunar Gateway was cancelled in March 2026.
+
+Hardware development, testing and integration 2021–2026
+
+On February 11, 2023, NASA rotated the Artemis II core stage's engine section to a horizontal position, marking the final major milestone before integration with the rest of the vehicle. On March 20, the engine section was mated with the core stage in Building 103 at the Michoud Assembly Facility in New Orleans, Louisiana. In March 2023, NASA initially expected to deliver the completed core stage to the Kennedy Space Center KSC that summer, but by May, the timeline had shifted to late autumn 2023.
+
+RS-25 engines serial numbers E2047, E2059, E2062, and E2063 were installed on the core stage in New Orleans by September 25, 2023. However, after a leak was discovered in its oxygen valve hydraulics, engine E2063 was replaced with E2061 in April 2025.
+
+The fully outfitted core stage was delivered to KSC between July 16 and 25, 2024. The adapters required for integration of the full launch vehicle also reached substantial completion in June 2024 and arrived at KSC in September 2024.
+
+The Artemis II crew was announced on April 3, 2023, by NASA Administrator Bill Nelson during his State of NASA address at a NASA facility at Ellington Field outside Houston, Texas, and the crew made a public appearance that evening at nearby NRG Stadium during the 2023 March Madness basketball championship game.
+
+NASA had originally targeted September 2024 to begin rocket stacking operations. However, the schedule was delayed by more than two months due to investigations into issues with Orion's life support system and unexpected damage to Orion's heat shield observed after the Artemis I reentry. Rocket stacking finally began on November 20, 2024. Stacking was completed on October 20, 2025, with the installation of the fully integrated Orion, ESM, and launch abort system atop the SLS rocket.
+
+On January 18, 2026, the integrated SLS rocket, Orion capsule, and launch tower were rolled out from the NASA Vehicle Assembly Building to Launch Complex 39B.
+
+Heat shield concerns
+
+After the uncrewed Artemis I mission in November 2022, NASA identified unexpected erosion of the Orion spacecraft's ablative heat shield after atmospheric reentry. Post-flight inspections found areas of char loss in the AVCOAT ablative material, in which portions of the material eroded more extensively than predicted by preflight models. NASA reported that temperatures within the crew module remained within design limits, but the unanticipated behavior prompted further analysis. Close-up imagery of the damage was not publicly released until May 2024, when it appeared in a report by the NASA Office of Inspector General.
+
+In April 2024, NASA established an independent review team to assess the heat shield performance and the agency's proposed approach for the Artemis II mission. The review concluded in December 2024, after which NASA announced it would proceed with Artemis II using the existing heat shield. NASA held a press briefing to outline its findings, but the publicly released version of the review team's report was heavily redacted, prompting criticism from some former NASA engineers and astronauts regarding the level of disclosure.
+
+NASA engineers determined that the char loss observed during Artemis I was caused by gases becoming trapped within the AVCOAT material, leading to cracking and localized material loss during reentry. Rather than replacing the heat shield for Artemis II, NASA modified the reentry trajectory by increasing the descent angle, reducing the time the spacecraft would spend in the thermal environment associated with the damage. According to NASA, modeling and ground testing indicated this change would limit further char loss while remaining within structural and thermal margins.
+
+As part of the certification process for Artemis II, NASA conducted additional testing and analysis, including evaluations of scenarios involving more extensive heat shield damage. NASA stated that these analyses showed the underlying structure of the Orion capsule would remain intact and capable of protecting the crew under conditions exceeding those expected during the mission reentry.
+
+In January 2026, NASA Administrator Jared Isaacman stated that he supported proceeding with Artemis II using the existing heat shield after reviewing the agency's analysis and meeting with engineers and outside experts. Some participants who had previously expressed concerns indicated that the additional data addressed their questions, while others continued to object to flying the mission without a redesigned heat shield. NASA has stated that design changes addressing AVCOAT permeability are planned for the heat shield intended for Artemis III.
+
+Mission delays
+
+During preliminary reviews in 2011, the launch date was placed somewhere between 2019 and 2021, but afterwards the launch date was delayed to 2023. In January 2024, the mission was expected to launch in September 2025. However, in October 2024, the NASA Office of Inspector General determined that the Exploration Ground Systems team had exhausted their time reserved for resolving any unforeseen issues, leading the office to determine that the September 2025 launch date would likely be delayed. In December 2024, outgoing administrator Nelson announced that the launch was delayed due to the months of engineering investigations into issues with the life support system and heat shield, but they were targeting a launch in April 2026.
+
+In March 2025 AmericaSpace reported that the launch date could be accelerated by two months to February 2026. NASA responded in a statement, saying it could not confirm the revised date but noted, We are looking for ways to enable an earlier launch if possible, potentially launching as soon as February 2026. A February target allows the agency to capitalize on efficiencies in the flow of operations to integrate the SLS rocket, Orion spacecraft, and supporting ground systems while maintaining crew safety as the top priority. By August 2025, more mainstream outlets such as NASASpaceflight, journalist Eric Berger and U.S. Senator and former astronaut Mark Kelly also reported that the mission had been moved to February 2026. In September, space agency officials announced that they were pursuing a launch window that opened on February 5, 2026.
+
+For the launch of lunar missions, there are both monthly windows of a few days duration each lunar month, and daily windows lasting a few hours on days within the monthly window. The revised Artemis II plan, which called for Orion to conduct a shorter skip reentry, further constrained the days within a monthly window during which a launch could be conducted.
+
+The earliest launch window for Artemis II was set for early February 2026. The January 2026 North American winter storm delayed preparations for the launch. A wet dress rehearsal of the countdown occurred February 2. After the test, NASA announced that the launch would be postponed to March due to a liquid hydrogen leak that occurred during the simulated countdown. In addition to the leak, a valve associated with Orion crew module hatch pressurization required retorquing, and closeout operations took longer than planned. A second wet dress rehearsal occurred on February 19 and was successful.
+
+On February 21, a helium flow issue was observed, triggering a rollback to the Vehicle Assembly Building VAB and delaying the mission to April at the earliest. The rollback began on February 25 at 9:38 am EST and arrived at the VAB at about 8:00 pm. NASA Administrator Jared Isaacman said that an actual launch date was to be confirmed only after a successful wet dress rehearsal was complete and the results were analyzed.
+
+Launch
+On March 12, after a Flight Readiness Review FRR, seven two-hour launch windows were announced for April 1–6 and April 30, with the first launch window being on April 1, 2026. On March 18, NASA announced that the Artemis II Space Launch System SLS rocket and Orion spacecraft would be rolled out the next day to Launch Pad 39B at the agency's Kennedy Space Center in Florida. Meanwhile, the Artemis II crew entered quarantine in Houston, Texas to ensure they remain healthy ahead of the launch. On March 20, after a delay due to high winds, the SLS was rolled out from the VAB to launch pad 39B a second time. The mission launched on April 1, 2026, at 22:35:12 UTC 6:35:12 pm EDT. It was the first crewed launch from LC-39B since STS-116 in 2006.
+
+Mission
+
+The Artemis II mission's plan was to send four astronauts in the first crewed Orion spacecraft into a lunar flyby using the Block 1 variant of the Space Launch System. The mission profile is a multi-trans-lunar injection MTLI, i.e. it involves multiple departure burns, and includes a free-return trajectory from the Moon. The Orion spacecraft was sent to a high Earth orbit with a period of roughly 24 hours. During this time the crew performed various check-ups of the spacecraft's life support systems as well as an in-space rendezvous and proximity operations demonstration using the spent Interim Cryogenic Propulsion Stage ICPS as a target. When Orion reached perigee once again, it fired its main engine to complete the TLI maneuver, which would send it onto a lunar free-return trajectory, before returning to Earth. The crew arrived at the Kennedy Space Center on March 27, and the countdown started on March 30.
+
+Mission overview
+Artemis II's trajectory can be divided into several key phases, over an approximately ten-day trip:
+
+Launch
+
+The mission launched aboard a Space Launch System SLS rocket from Kennedy Space Center's Launch Complex 39B at 22:35:12 UTC 6:35:12 p.m. EDT, local time at the launch site. The four RS-25 engines on the core stage ignited approximately seven seconds before liftoff; after their performance was confirmed at full power, the solid rocket boosters, whose ignition cannot be reversed, ignited at T-0, providing the majority of thrust during the first two minutes. Booster separation occurred at roughly 3,100 miles per hour 5,000 km/h and an altitude of 30 miles 48 km. Wiseman monitored the launch from the left seat, although the flight is fully automated unless intervention is required, which would likely be to issue an abort command. The core stage burned for about eight minutes before separation, leaving Orion in a highly elliptical orbit with an apogee of roughly 1,200 nautical miles 2,200 km 1,400 mi, nearly five times higher than the International Space Station. The Interim Cryogenic Propulsion Stage ICPS did not fire during the initial ascent.
+
+Earth orbit and systems checkout
+Right after main-engine cutoff, Koch and Hansen were scheduled to unstrap from their seats and set up and test essential life support systems on the spacecraft including the water dispenser, firefighting masks, and toilet systems. All systems checked out after the crew resolved minor issues with the toilet and water dispenser, and the ICPS ignited at apogee, about 50 minutes after liftoff to raise Orion's perigee.
+
+When the spacecraft reached this new perigee, it executed a 15 minute burn to increase the next apogee to 38,000 nautical miles 70,000 km 44,000 mi, establishing a 23.5 hour high Earth orbit.
+
+After this burn, which consumed nearly all the fuel in the ICPS, the Orion and its European Service Module separated from the upper stage. The crew then conducted a proximity operations demonstration using the ICPS as a target. Over approximately 70 minutes, Glover, in the left seat of Orion at the primary controls, performed a series of maneuvers to evaluate handling qualities and practice techniques for future docking operations. The ICPS was equipped with a docking target, enabling tests of Orion's ability to manually maneuver relative to another spacecraft using onboard navigation sensors and reaction control thrusters.
+
+Following the demonstration, Orion returned to automated control while the ICPS performed a deorbit burn for destructive reentry, deploying its rideshare CubeSats during this phase.
+
+After these operations, the crew reconfigured the cabin for spaceflight, set up their flywheel exercise device and used it to conduct a life-support system stress test through physical activity, and had dinner.
+
+The first sleep period was divided into two four-hour segments, interrupted to monitor a burn by the European Service Module that raised the spacecraft's perigee. Following the burn, the astronauts returned to sleep while NASA managers reviewed spacecraft performance before authorizing the final trans-lunar injection TLI burn.
+
+Trans-lunar injection and outbound flight
+
+On flight day 2, after completing high Earth orbit operations and system verification, Orion performed a 5 minute, 49 second trans-lunar injection burn using the main AJ10 engine of its European Service Module. The maneuver consumed about 1,000 pounds 450 kg of hypergolic propellants and placed the spacecraft on a free-return trajectory, allowing it to loop around the Moon and return to Earth without further propulsion, aside from minor course corrections.
+
+On flight day 3, the first of three planned outbound trajectory correction burns was deemed unnecessary after Mission Control determined the spacecraft was already on a favorable trajectory.
+
+On flight day 4, Koch and Hansen took turns manually controlling the spacecraft to evaluate its performance in deep space. Over 41 minutes, they tested two thruster control modes six degrees of freedom and three degrees of freedom to provide engineers with further data and perspectives on the spacecraft's handling qualities.
+
+Experiments
+The mission includes a payload titled AVATAR A Virtual Astronaut Tissue Analog Response which can mimic individual astronaut organs, marking the first time that AVATAR has been tested outside of the International Space Station and Earth's Van Allen Belt. Crew health for this mission is critical for missions in deep space in the future. The mission also includes a new payload titled ARCHeR Artemis Research for Crew Health and Readiness. For ARCHeR, crew members will wear movement and sleep monitors before, during, and after the mission to study real-time health and behavioral information for crew members so scientists can study sleep patterns and overall health performance.
+
+Scientists will test immunity biomarkers, with crew providing saliva samples before, during, and after the mission to test their immune system and how they are affected by radiation, isolation, and the distance away from Earth during deep space flight. This mission will also allow astronauts and scientists to understand space weather that will be faced in future missions, as well as how humans can survive and sustain themselves in space.
+
+Lunar fly-by
+
+Orion will fly around the Moon at a closest approach of about 4,047 miles 6,513 km from the far-side lunar surface. Its farthest distance from Earth is expected to be 252,757 miles 406,773 km, surpassing Apollo 13 248,655 miles 400,171 km as the farthest crewed mission from Earth. The outbound journey and lunar flyby are expected to take about four days, during which the crew will monitor spacecraft systems and gather data on the effects of deep space travel. They will perform trajectory correction burns as needed during the flyby, then Orion will use the Moon's gravity to assist its return to Earth on a free-return trajectory. NASA anticipates performing further trajectory correction burns during the four-day return flight to ensure accurate Earth re-entry.
+
+Re-entry and splashdown
+Orion will re-enter Earth's atmosphere at about 25,000 miles per hour 40,000 km/h, the fastest crewed reentry ever attempted. Initially, the mission was planned to use a skip reentry, briefly dipping into the upper atmosphere to use its lift to bounce back outward, dissipating energy and enabling a more precise landing. However, due to heat shield erosion observed during Artemis I, mission managers eliminated the skip reentry in favor of a steeper entry profile. Splashdown is planned in the Pacific Ocean near San Diego, California, where the U.S. Navy will recover the crew. The mission is expected to last about 10 days from launch to splashdown.
+
+Once the crew is safely removed from Orion, the capsule will be towed by the Navy and the astronauts will be sent to a medical center for evaluation. Once the astronauts are safely back on Earth, they will be tested in an obstacle course to see how quickly they can function during a gravity spacewalk. The astronauts will also perform a simulated spacewalk to investigate how quickly they can adjust to a change of gravity for the landing on the Moon and possible mission to Mars.
+
+Optical communications
+
+Artemis II is testing and demonstrating optical communications to and from Earth using the Orion Artemis II Optical Communications System O2O, which uses laser beams. Such an optical system can be smaller and lighter than conventional radio and can use less power, while increasing the rate of transmission. The O2O hardware is integrated into the Orion spacecraft and included an optical module a 4-inch 100 mm telescope and two gimbals, a modem and control electronics. O2O will communicate with ground stations in California and New Mexico. The test device is sending data to Earth with an uplink rate of up to 260 megabits per second.
+
+CubeSat secondary payloads
+
+NASA's CubeSat Launch Initiative CSLI originally sought proposals in 2019 from U.S. institutions and companies to fly CubeSat missions as secondary payloads aboard the SLS on the Artemis II mission. NASA planned to accept 6-unit 12 kg, 26 lb and 12-unit 20 kg, 44 lb CubeSats, which would be mounted on the inside of the stage adapter ring between the SLS upper stage and the Orion spacecraft, deploying after Orion separated into high Earth orbit. Although selections were initially expected by February 2020, all secondary payloads were removed from the mission plans in October 2021.
+
+In September 2024, NASA announced that it would fly five CubeSats from international partners aboard the Artemis II mission. The payloads, selected from nations that are signatories to the Artemis Accords, are intended to advance global scientific and technological research while broadening international access to deep space.
+
+The first CubeSat selected was Germany's TACHELES, which will examine the impact of space conditions on electrical components used in lunar vehicles. In May 2025, NASA announced that it had selected the ATENEA satellite from Argentina's National Space Activities Commission to join the mission, with goals to study radiation shielding, map the surrounding radiation environment, gather GPS data for mission planning, and test a long-distance communication system. The third and fourth satellites are K-RadCube from the Korea AeroSpace Administration, which will study a dosimeter material made to mimic human tissue to measure the effects of space radiation, and the Space Weather CubeSat-1 from the Saudi Space Agency to measure aspects of space weather in high Earth orbit. The fifth CubeSat is an Avionics Unit.
+
+Public outreach
+See also Artemis I Public outreach
+
+To raise public awareness, NASA provided a website for members of the public to obtain a digital souvenir boarding pass for the mission. Before launch, people could enter their names online which would be stored on an SD card inside the Orion spacecraft when it flies around the Moon. The website produced a boarding pass image for download bearing the name or text entered by the website visitor.
+
+On March 7, 2025, NASA announced the Artemis II zero gravity indicator ZGI design challenge to create a mascot for the mission. More than 2,600 submissions from over 50 countries were received, with prizes totaling US$23,275 awarded to the winner and 24 finalists. At a pre-launch ceremony at Kennedy Space Center on March 27, 2026, Christina Koch announced Rise, designed by 8-year-old Lucas Ye of Mountain View, California, as the winner. Inspired by the Apollo 8 Earthrise photograph, the mascot depicts the Moon wearing Earth as a baseball cap and was fabricated by NASA for flight and tethered inside the crew cabin.
+
+On March 4, 2026, NASA published the astronauts' menu for Artemis II. During launch and landing, the crew will consume only ready-to-eat foods, while in orbit they can rehydrate freeze-dried meals using Orion's water dispenser and can heat items with a briefcase-style food warmer. The four-person crew selected the menu following preflight taste tests, balancing nutritional requirements with storage constraints. Selected items include 58 tortillas, vegetable quiche, barbecued brisket, and spicy green beans; the menu also incorporates five Canadian products in recognition of the mission's Canadian crew member. Additional provisions include 43 servings of coffee, five varieties of hot sauce, and condiments such as maple syrup, peanut butter, mustard, jam, and honey.
+
+Similar missions
+Artemis II's objectives are comparable to those of Apollo 8, the first crewed lunar mission of the Apollo program, in 1968. Unlike Apollo 8 and Apollo 10 in 1969, both of which orbited the Moon without landing, Artemis II will not enter lunar orbit. Instead, Artemis II will fly around the Moon on a free-return trajectory, like Apollo 13 in 1970. While Apollo 13 came within 158 miles 254 km above the lunar surface, Artemis II is expected to make its closest approach at approximately 4,700 miles 7,600 km, a little over two lunar diameters.

@@ -1,0 +1,82 @@
+[
+    {
+        "question": "What is Artemis II?",
+        "expected_answer": "Artemis II is an ongoing United States spaceflight mission sending four astronauts on a flyby around the Moon."
+    },
+    {
+        "question": "When did Artemis II launch?",
+        "expected_answer": "It launched from Kennedy Space Center on April 1, 2026."
+    },
+    {
+        "question": "How many astronauts are on Artemis II, and which agencies are they from?",
+        "expected_answer": "The mission is crewed by NASA astronauts Reid Wiseman, Victor Glover, Christina Koch, and Canadian Space Agency astronaut Jeremy Hansen."
+    },
+    {
+        "question": "What is significant about Artemis II in terms of crewed missions beyond low Earth orbit?",
+        "expected_answer": "It is the first crewed mission beyond low Earth orbit since Apollo 17 in December 1972."
+    },
+    {
+        "question": "What program objectives does Artemis II support?",
+        "expected_answer": "The mission is a test flight supporting subsequent Artemis missions aimed at returning humans to the lunar surface."
+    },
+    {
+        "question": "Which Apollo missions are Artemis II’s objectives and trajectory compared to?",
+        "expected_answer": "Artemis II's mission objectives are similar to Apollo 8, and its free-return trajectory more closely resembles Apollo 13."
+    },
+    {
+        "question": "Who became the first person of color, woman, non-U.S. citizen, and oldest person beyond low Earth orbit during the mission?",
+        "expected_answer": "Victor Glover, Christina Koch, Jeremy Hansen, and Reid Wiseman, respectively."
+    },
+    {
+        "question": "What distance from Earth is Artemis II expected to reach?",
+        "expected_answer": "About 252,757 miles (406,773 km) from Earth."
+    },
+    {
+        "question": "What was the original plan for Exploration Mission-2 before the Asteroid Redirect Mission was canceled?",
+        "expected_answer": "It was originally planned to rendezvous with an asteroid in lunar orbit for astronauts to perform spacewalks and gather samples."
+    },
+    {
+        "question": "Which rocket was selected for launching the Lunar Gateway module?",
+        "expected_answer": "SpaceX Falcon Heavy was selected as the launcher."
+    },
+    {
+        "question": "When was the Artemis II crew officially announced?",
+        "expected_answer": "April 3, 2023, by NASA Administrator Bill Nelson during his State of NASA address."
+    },
+    {
+        "question": "Why was rocket stacking delayed from September 2024?",
+        "expected_answer": "Due to investigations into Orion’s life support system and unexpected damage to Orion’s heat shield."
+    },
+    {
+        "question": "What issue was found on the Artemis I heat shield?",
+        "expected_answer": "Unexpected erosion of the AVCOAT ablative heat shield, with localized material loss after reentry."
+    },
+    {
+        "question": "How did NASA address the heat shield concerns for Artemis II?",
+        "expected_answer": "NASA modified the reentry trajectory to reduce time in the thermal environment, and planned design changes for Artemis III."
+    },
+    {
+        "question": "When was the Artemis II launch ultimately scheduled?",
+        "expected_answer": "April 1, 2026, with the first launch window opening on that date."
+    },
+    {
+        "question": "What is the purpose of the trans-lunar injection burn?",
+        "expected_answer": "To place the spacecraft on a free-return trajectory around the Moon."
+    },
+    {
+        "question": "What experiments are included on Artemis II to study astronaut health?",
+        "expected_answer": "AVATAR tests organ-like tissue analogs, and ARCHeR monitors movement, sleep, immunity biomarkers, and overall health in deep space."
+    },
+    {
+        "question": "How close will Orion fly to the Moon during the lunar flyby?",
+        "expected_answer": "About 4,047 miles (6,513 km) from the far-side lunar surface."
+    },
+    {
+        "question": "What is the Artemis II Optical Communications System (O2O) testing?",
+        "expected_answer": "O2O tests optical communications using lasers to send data to Earth at up to 260 megabits per second."
+    },
+    {
+        "question": "What CubeSats are being flown aboard Artemis II, and what are their purposes?",
+        "expected_answer": "Five CubeSats: Germany's TACHELES, Argentina's ATENEA, Korea's K-RadCube, Saudi Space Agency's Space Weather CubeSat-1, and an Avionics Unit; purposes include studying space conditions, radiation, GPS, and space weather."
+    }
+]
