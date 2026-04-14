@@ -92,10 +92,12 @@ BERT embeddings and NLTK sentence tokenisation are optimised for English. Other 
 ## Installation
 
 ```bash
-pip install chunk-norris
+pip install git+https://github.com/HaroldConley/chunk-norris.git
 ```
 
 **Requirements:** Python 3.10+
+
+> PyPI release (`pip install chunk-norris`) coming soon.
 
 On first use, `SentenceChunker` will automatically download a small NLTK model (~1MB). This requires an internet connection once — subsequent uses load from cache.
 
