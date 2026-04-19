@@ -41,10 +41,11 @@ chunk-norris turns chunking strategy selection from a guess into a measurement.
 2. **chunk-norris chunks** the document with each strategy you want to compare
 3. **For each question**, it retrieves the top K chunks using semantic search
 4. **Each retrieved chunk is scored** against the expected answer using two complementary metrics:
-   - **Token recall** — does the chunk contain the answer's key words? *(measures completeness)*
-   - **Bert score** — is the chunk semantically focused on the answer? *(penalises noise)*
-5. **The combined score** is their average — rewarding chunks that are both complete and focused
-6. **Results are ranked** and the best chunker is returned as a usable object
+   - **Answer span coverage** (token recall) — what fraction of the answer's tokens appear in the chunk? *(measures completeness)*
+   - **Semantic focus** (bert score) — is the chunk semantically focused on the answer topic? *(penalises noise)*
+5. **Recall@K** — the primary signal is whether any of the top K retrieved chunks covers the gold answer span
+6. **The combined score** rewards chunks that are both complete AND focused — catching the full-document-chunk failure mode
+7. **Results are ranked** and the best chunker is returned as a usable object
 
 ```
 Document → [FixedChunker]     → chunks → retrieve → score → 0.74
@@ -194,22 +195,24 @@ print(f"Chunks produced: {len(chunks)}")
 
 chunk-norris uses two complementary metrics to score each retrieved chunk against the expected answer:
 
-| Metric | Measures | Catches |
-|---|---|---|
-| **Token recall** | Fraction of expected answer tokens present in chunk | Missing content, wrong section retrieved |
-| **Bert score** | Semantic similarity between chunk and expected answer | Noisy chunks, full-document chunks |
-| **Combined** | Average of both | Primary ranking signal |
+| chunk-norris name | Research equivalent | Measures | Catches |
+|---|---|---|---|
+| **Token recall** | Answer span coverage | Fraction of expected answer tokens present in chunk | Missing content, wrong section retrieved |
+| **Bert score** | Semantic similarity | Semantic similarity between chunk and expected answer | Noisy chunks, full-document chunks |
+| **Combined** | Recall@K signal | Average of both — primary ranking metric | Both failure modes |
+
+The primary question chunk-norris answers is a form of **Recall@K**: among the top K retrieved chunks, does at least one cover the gold answer span?  is this signal — it scores the best chunk in the retrieved set rather than averaging across all K.
 
 **Why two metrics?** They catch different failure modes:
 
 ```
 Full document as one chunk:
-  token_recall = 1.00  (contains everything — trivially true)
-  bert_score   = 0.10  (diluted by all other content)
+  token_recall = 1.00  (contains everything — trivially true, span coverage is meaningless)
+  bert_score   = 0.10  (diluted by all other content — semantic focus fails)
   combined     = 0.55  ← correctly penalised
 
 Perfect focused chunk:
-  token_recall = 1.00  (contains the answer)
+  token_recall = 1.00  (gold span fully covered)
   bert_score   = 0.89  (focused on the answer topic)
   combined     = 0.95  ← correctly rewarded
 ```
@@ -232,10 +235,11 @@ If `n_relevant` is always 0 across questions, lower your threshold. If `n_releva
 The quality of your evaluation depends on the quality of your questions. A few guidelines:
 
 - **Write questions that have a specific, locatable answer** in the document
-- **Use the document's vocabulary** in expected answers where possible
+- **Use the document's vocabulary** in expected answers where possible — token recall depends on vocabulary match
 - **Avoid questions that require combining multiple sections** (planned for v2)
 - **Aim for 15-30 questions** that cover different sections of the document
 - Each expected answer should be **one to three sentences** — concise and factual
+- **Vary answer span length** — include short factual questions ("Who?", "When?") and longer explanatory ones ("How does X work?"). This naturally stress-tests different chunk sizes and gives a more complete picture of strategy performance across different question types
 
 ---
 

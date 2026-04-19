@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Updated metrics terminology in README to align with RAG research standards:
+  token recall → answer span coverage, bert score → semantic focus,
+  best_combined → Recall@K signal
+
 Planned for v0.2.0:
 - Automatic question generation using an LLM
 - Multi-chunk question support
