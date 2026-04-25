@@ -167,8 +167,8 @@ class Report:
         wb.remove(wb.active)
 
         self._write_summary_sheet(wb)
-        for experiment in self.experiments:
-            self._write_detail_sheet(wb, experiment)
+        for i, experiment in enumerate(self.experiments, start=1):
+            self._write_detail_sheet(wb, experiment, sheet_index=i)
 
         wb.save(path)
         print(f"Results exported to {path}")
@@ -201,6 +201,7 @@ class Report:
         best_label = self.best()["chunker"]
 
         headers = [
+            "Config",
             "Chunker",
             "Best combined (avg)",
             "Best recall (avg)",
@@ -210,12 +211,19 @@ class Report:
         ]
         self._write_header_row(ws, headers)
 
+        # Build label → sheet index map for the Config column
+        label_to_index = {
+            exp["chunker"]: i
+            for i, exp in enumerate(self.experiments, start=1)
+        }
+
         for i, entry in enumerate(self._summary, start=2):
             is_best = entry["chunker"] == best_label
             fill = _BEST_FILL if is_best else (
                 _ALT_FILL if i % 2 == 0 else PatternFill()
             )
             row = [
+                f"Config {label_to_index.get(entry['chunker'], '?')}",
                 entry["chunker"],
                 entry["avg_best_combined"],
                 entry["avg_best_recall"],
@@ -230,19 +238,34 @@ class Report:
                 cell.border = _THIN_BORDER
                 cell.alignment = _WRAP
 
-        ws.column_dimensions["A"].width = 45
-        for col in ["B", "C", "D", "E", "F"]:
+        ws.column_dimensions["A"].width = 10   # Config
+        ws.column_dimensions["B"].width = 45   # Chunker
+        for col in ["C", "D", "E", "F", "G"]:
             ws.column_dimensions[col].width = 20
 
     def _write_detail_sheet(
-        self, wb: Workbook, experiment: dict[str, Any]
+        self, wb: Workbook, experiment: dict[str, Any], sheet_index: int
     ) -> None:
         label = experiment["chunker"]
         results = experiment["results"]
-        sheet_name = label[:31]
+
+        # Excel sheet names are limited to 31 characters.
+        # Use "Config N" as the tab name and write the full chunker label
+        # in a title row above the headers so it is always readable.
+        sheet_name = f"Config {sheet_index}"
         ws = wb.create_sheet(sheet_name)
 
         n_chunks = results[0]["scores"]["n_retrieved"] if results else 3
+        n_cols = 6 + (n_chunks * 4)
+
+        # Title row — full chunker label across all columns
+        title_cell = ws.cell(row=1, column=1, value=label)
+        title_cell.font = Font(bold=True, color="FFFFFF", size=11)
+        title_cell.fill = PatternFill("solid", fgColor="1A2F45")
+        ws.merge_cells(
+            start_row=1, start_column=1,
+            end_row=1, end_column=n_cols,
+        )
 
         headers = (
             [
@@ -258,9 +281,9 @@ class Report:
             + [f"Chunk {i+1} recall" for i in range(n_chunks)]
             + [f"Chunk {i+1} bert" for i in range(n_chunks)]
         )
-        self._write_header_row(ws, headers)
+        self._write_header_row(ws, headers, row=2)
 
-        for row_i, result in enumerate(results, start=2):
+        for row_i, result in enumerate(results, start=3):
             scores = result["scores"]
             threshold = scores["recall_threshold"]
             fill = _ALT_FILL if row_i % 2 == 0 else PatternFill()
@@ -313,11 +336,11 @@ class Report:
         for i in range(n_chunks * 3):
             ws.column_dimensions[get_column_letter(7 + n_chunks + i)].width = 14
 
-        ws.freeze_panes = "A2"
+        ws.freeze_panes = "A3"
 
-    def _write_header_row(self, ws: Any, headers: list[str]) -> None:
+    def _write_header_row(self, ws: Any, headers: list[str], row: int = 1) -> None:
         for col, header in enumerate(headers, start=1):
-            cell = ws.cell(row=1, column=col, value=header)
+            cell = ws.cell(row=row, column=col, value=header)
             cell.font = _HEADER_FONT
             cell.fill = _HEADER_FILL
             cell.border = _THIN_BORDER

@@ -336,8 +336,11 @@ class TestToExcel:
         report = Report(experiments=experiments)
         report.to_excel(path)
         wb = load_workbook(path)
-        # Summary + one per chunker
+        # Summary + one Config sheet per chunker
         assert len(wb.sheetnames) == 3
+        assert "Summary" in wb.sheetnames
+        assert "Config 1" in wb.sheetnames
+        assert "Config 2" in wb.sheetnames
 
     def test_summary_sheet_has_correct_row_count(self, tmp_path):
         path = str(tmp_path / "results.xlsx")
@@ -360,8 +363,9 @@ class TestToExcel:
         report.to_excel(path)
         wb = load_workbook(path)
         ws = wb["Summary"]
-        first_cell = ws.cell(row=1, column=1).value
-        assert first_cell == "Chunker"
+        # First column is now Config, second is Chunker
+        assert ws.cell(row=1, column=1).value == "Config"
+        assert ws.cell(row=1, column=2).value == "Chunker"
 
     def test_detail_sheet_has_correct_row_count(self, tmp_path):
         path = str(tmp_path / "results.xlsx")
@@ -370,6 +374,7 @@ class TestToExcel:
         report = Report(experiments=[exp])
         report.to_excel(path)
         wb = load_workbook(path)
-        ws = wb["ChunkerA"]
-        # Header + one row per question
-        assert ws.max_row == 6
+        # Detail sheets are now named Config N, not by chunker label
+        ws = wb["Config 1"]
+        # Title row + header row + one row per question
+        assert ws.max_row == 7

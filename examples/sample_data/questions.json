@@ -5,7 +5,7 @@
   },
   {
     "question": "What is the first crewed mission beyond low Earth orbit since Apollo 17?",
-    "expected_answer": "the first crewed mission beyond low Earth orbit since Apollo 17 in December 1972."
+    "expected_answer": "It is the second flight of the Space Launch System SLS, the first crewed mission of the Orion spacecraft."
   },
   {
     "question": "What was selected as the launcher for the first Gateway module?",
@@ -28,15 +28,15 @@
     "expected_answer": "NASA stated that these analyses showed the underlying structure of the Orion capsule would remain intact and capable of protecting the crew under conditions exceeding those expected during the mission reentry."
   },
   {
-    "question": "What did outgoing administrator Nelson announce in December 2024 regarding the launch?",
-    "expected_answer": "the launch was delayed due to the months of engineering investigations into issues with the life support system and heat shield, but they were targeting a launch in April 2026."
+    "question": "What was the targeted launch date announced in December 2024?",
+    "expected_answer": "they were targeting a launch in April 2026."
   },
   {
-    "question": "What was the earliest launch window for Artemis II?",
-    "expected_answer": "The earliest launch window for Artemis II was set for early February 2026."
+    "question": "Why was the launch postponed?",
+    "expected_answer": "the launch would be postponed to March due to a liquid hydrogen leak that occurred during the simulated countdown."
   },
   {
-    "question": "When is the first launch window announced for the Artemis II Space Launch System SLS rocket and Orion spacecraft?",
+    "question": "When was the first launch window announced for the Artemis II mission?",
     "expected_answer": "the first launch window being on April 1, 2026."
   },
   {
@@ -48,35 +48,35 @@
     "expected_answer": "essential life support systems on the spacecraft including the water dispenser, firefighting masks, and toilet systems."
   },
   {
-    "question": "What did the spacecraft execute to increase the next apogee to 38,000 nautical miles?",
-    "expected_answer": "it executed a 15 minute burn to increase the next apogee to 38,000 nautical miles 70,000 km 44,000 mi, establishing a 23.5 hour high Earth orbit."
+    "question": "What was the new apogee reached by the spacecraft after the burn?",
+    "expected_answer": "38,000 nautical miles 70,000 km 44,000 mi"
   },
   {
-    "question": "What did Koch and Hansen do on flight day 4?",
-    "expected_answer": "On flight day 4, Koch and Hansen took turns manually controlling the spacecraft to evaluate its performance in deep space."
+    "question": "How long did the trans-lunar injection burn last?",
+    "expected_answer": "5 minute, 49 second trans-lunar injection burn"
   },
   {
     "question": "What is the title of the payload that can mimic individual astronaut organs?",
     "expected_answer": "AVATAR A Virtual Astronaut Tissue Analog Response"
   },
   {
-    "question": "Where is the planned splashdown for the mission?",
+    "question": "Where is splashdown planned for the mission?",
     "expected_answer": "Splashdown is planned in the Pacific Ocean near San Diego, California, where the U.S. Navy will recover the crew."
   },
   {
-    "question": "What system is Artemis II using for optical communications to and from Earth?",
-    "expected_answer": "the Orion Artemis II Optical Communications System O2O, which uses laser beams."
+    "question": "What will happen to the astronauts after they are safely removed from Orion?",
+    "expected_answer": "the astronauts will be sent to a medical center for evaluation."
   },
   {
-    "question": "What was the weight limit for the 12-unit CubeSats proposed for the CubeSat Launch Initiative CSLI?",
-    "expected_answer": "NASA planned to accept 12-unit 20 kg, 44 lb CubeSats."
+    "question": "What is the first CubeSat selected for the Artemis II mission?",
+    "expected_answer": "The first CubeSat selected was Germany's TACHELES, which will examine the impact of space conditions on electrical components used in lunar vehicles."
   },
   {
-    "question": "Which satellite was selected by NASA to join the mission in May 2025?",
-    "expected_answer": "NASA announced that it had selected the ATENEA satellite from Argentina's National Space Activities Commission to join the mission."
+    "question": "What did NASA provide for members of the public to obtain a digital souvenir boarding pass for the mission?",
+    "expected_answer": "NASA provided a website for members of the public to obtain a digital souvenir boarding pass for the mission."
   },
   {
-    "question": "What type of foods will the crew consume during launch and landing for Artemis II?",
-    "expected_answer": "During launch and landing, the crew will consume only ready-to-eat foods."
+    "question": "What items are included in the selected menu for the crew?",
+    "expected_answer": "Selected items include 58 tortillas, vegetable quiche, barbecued brisket, and spicy green beans; the menu also incorporates five Canadian products in recognition of the mission's Canadian crew member."
   }
 ]

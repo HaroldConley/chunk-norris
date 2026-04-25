@@ -6,9 +6,9 @@ from chunk_norris.chunkers.base import BaseChunker
 from chunk_norris.embeddings.base import BaseEmbedder
 from chunk_norris.evaluator.metrics import Metrics
 from chunk_norris.evaluator.report import Report
-from chunk_norris.evaluator.retriever import Retriever
 from chunk_norris.llm.base import BaseLLM
 from chunk_norris.question_gen import QuestionGenerator
+from chunk_norris.retrieval.hybrid import HybridRetriever
 
 # Used only for the token count in the progress header.
 _ENCODING = tiktoken.get_encoding("cl100k_base")
@@ -23,9 +23,14 @@ class Norris:
     complementary deterministic metrics:
 
         - Answer span coverage (token recall): does the chunk contain
-          the answer's key tokens? (measures completeness)
+          the answer's key tokens? Proxy for BM25 retrievability.
         - Semantic focus (bert score): is the chunk semantically focused
-          on the answer? (measures focus / penalises noise)
+          on the answer? Proxy for semantic search retrievability.
+
+    Retrieval uses hybrid search by default — combining semantic search
+    and BM25 keyword search via Reciprocal Rank Fusion (RRF). This
+    mirrors how modern production RAG systems retrieve content and
+    ensures the evaluation reflects real-world retrieval behaviour.
 
     An LLM is optionally used for automatic question generation via
     generate_questions() — it is never used during evaluation.
@@ -179,8 +184,9 @@ class Norris:
 
         For each chunker:
             1. Chunks the text.
-            2. Indexes the chunks in the retriever.
-            3. Retrieves top_k chunks per question.
+            2. Indexes the chunks in both dense and BM25 indexes.
+            3. Retrieves top_k chunks per question using hybrid search
+               (semantic + BM25 via Reciprocal Rank Fusion).
             4. Scores each retrieved chunk against the expected answer
                using answer span coverage (token recall) and semantic
                focus (bert score).
@@ -213,7 +219,7 @@ class Norris:
 
         token_count = len(_ENCODING.encode(text))
         n_questions = len(questions)
-        n_chunkers = len(chunkers)
+        n_chunkers  = len(chunkers)
 
         print("chunk-norris starting...")
         print(
@@ -238,14 +244,17 @@ class Norris:
             print(f"{len(chunks)} chunks")
 
             print("      Indexing...   ", end="", flush=True)
-            retriever = Retriever(embedder=self.embedder, top_k=self.top_k)
+            retriever = HybridRetriever(embedder=self.embedder)
             retriever.index(chunks)
             print("done")
 
             print(f"      Scoring...   ", end="", flush=True)
             results = []
             for j, question in enumerate(questions, start=1):
-                retrieved_chunks = retriever.retrieve(question["question"])
+                retrieved_chunks = retriever.retrieve(
+                    query=question["question"],
+                    top_k=self.top_k,
+                )
                 result = {
                     "question":         question["question"],
                     "expected_answer":  question["expected_answer"],

@@ -63,6 +63,12 @@ from chunk_norris.embeddings.base import BaseEmbedder, EmbeddingError
 from chunk_norris.llm.openai_llm import OpenAILLM
 from chunk_norris.llm.base       import BaseLLM, LLMError
 
+# --- retrieval ---
+from chunk_norris.retrieval.hybrid import HybridRetriever
+from chunk_norris.retrieval.dense  import DenseRetriever
+from chunk_norris.retrieval.bm25   import BM25Retriever
+from chunk_norris.retrieval.base   import BaseRetriever
+
 __all__ = [
     "__version__",
     # --- main entry point ---
@@ -80,4 +86,9 @@ __all__ = [
     "OpenAILLM",
     "BaseLLM",
     "LLMError",
+    # --- retrieval ---
+    "HybridRetriever",
+    "DenseRetriever",
+    "BM25Retriever",
+    "BaseRetriever",
 ]
