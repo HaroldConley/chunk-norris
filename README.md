@@ -6,8 +6,19 @@ chunk-norris evaluates and compares chunking strategies against your actual docu
 
 ```python
 from chunk_norris import Norris, BertEmbedder, FixedChunker, RecursiveChunker
+from chunk_norris.llm.openai_llm import OpenAILLM
 
 norris = Norris(embedder=BertEmbedder())
+
+# Option A — auto-generate questions (recommended)
+questions = norris.generate_questions(
+    text=my_document,
+    llm=OpenAILLM(model="gpt-4o-mini-2024-07-18"),
+    n=20,
+)
+
+# Option B — provide your own questions
+# questions = [{"question": "...", "expected_answer": "..."}, ...]
 
 report = norris.run(
     text=my_document,
@@ -16,7 +27,7 @@ report = norris.run(
         FixedChunker(chunk_size=256, overlap=0.1),
         RecursiveChunker(chunk_size=256, overlap=0.1),
     ],
-    questions=my_questions,
+    questions=questions,
 )
 
 report.compare()
@@ -37,23 +48,24 @@ chunk-norris turns chunking strategy selection from a guess into a measurement.
 
 ## How it works
 
-1. **You provide** a document, a set of questions, and their expected answers
+1. **You provide** a document and either write questions or let an LLM generate them automatically
 2. **chunk-norris chunks** the document with each strategy you want to compare
-3. **For each question**, it retrieves the top K chunks using semantic search
+3. **For each question**, it retrieves the top K chunks using hybrid search — combining semantic search (BERT embeddings) and keyword search (BM25) via Reciprocal Rank Fusion (RRF)
 4. **Each retrieved chunk is scored** against the expected answer using two complementary metrics:
-   - **Answer span coverage** (token recall) — what fraction of the answer's tokens appear in the chunk? *(measures completeness)*
-   - **Semantic focus** (bert score) — is the chunk semantically focused on the answer topic? *(penalises noise)*
-5. **Recall@K** — the primary signal is whether any of the top K retrieved chunks covers the gold answer span
-6. **The combined score** rewards chunks that are both complete AND focused — catching the full-document-chunk failure mode
-7. **Results are ranked** and the best chunker is returned as a usable object
+   - **Answer span coverage** (token recall) — what fraction of the answer's tokens appear in the chunk? Proxy for BM25 retrievability.
+   - **Semantic focus** (bert score) — is the chunk semantically focused on the answer topic? Proxy for semantic search retrievability.
+5. **The combined score** approximates hybrid search retrievability — rewarding chunks that are both complete AND focused
+6. **Results are ranked** and the best chunker is returned as a usable object
 
 ```
-Document → [FixedChunker]     → chunks → retrieve → score → 0.74
-Document → [SentenceChunker]  → chunks → retrieve → score → 0.81  ← best
-Document → [RecursiveChunker] → chunks → retrieve → score → 0.79
-                                                              ↓
-                                              best_chunker().chunk(document)
+Document → [FixedChunker]     → chunks → hybrid retrieve → score → 0.74
+Document → [SentenceChunker]  → chunks → hybrid retrieve → score → 0.84  ← best
+Document → [RecursiveChunker] → chunks → hybrid retrieve → score → 0.79
+                                                                    ↓
+                                                best_chunker().chunk(document)
 ```
+
+**Technical note:** hybrid retrieval combines dense retrieval (BERT embeddings + cosine similarity) and sparse retrieval (BM25) via Reciprocal Rank Fusion (RRF, k=60). This mirrors how modern production RAG systems retrieve content and ensures the evaluation reflects real-world retrieval behaviour.
 
 ---
 
@@ -72,7 +84,10 @@ Evaluate (chunk-norris) → Chunk → Embed → Store → Query → Answer
 ```
 
 **No LLM required for evaluation.**
-Scoring uses deterministic metrics — token recall and cosine similarity — rather than LLM-as-judge. This makes results reproducible, cost-free, and model-independent. LLM answer generation is planned as an optional step in a future version.
+Scoring uses deterministic metrics — token recall and cosine similarity — rather than LLM-as-judge. This makes results reproducible, cost-free, and model-independent. An LLM is optionally used for question generation, never for evaluation.
+
+**Hybrid retrieval by default.**
+chunk-norris uses hybrid search (semantic + BM25 via RRF) for retrieval, matching current production RAG best practices. The two evaluation metrics mirror the two retrieval signals: answer span coverage approximates BM25 retrievability, semantic focus approximates semantic search retrievability.
 
 ### Assumptions
 
@@ -83,7 +98,10 @@ Token recall measures whether the expected answer's words appear in a retrieved 
 Token recall measures word *presence*, not word *context*. A chunk containing the right words in a misleading context ("Reid Wiseman was not selected for the mission") would score high on recall despite being unhelpful. In practice this is rare in well-structured documents, but be aware that recall is a necessary condition for a good chunk, not a sufficient one.
 
 **Questions are answerable from a single passage.**
-Each question should be answerable from a single chunk of the document. Questions that require combining information from multiple sections — comparisons, aggregations, summaries — will score lower than their actual retrieval quality. Multi-chunk question support is planned for v2.
+Each question should be answerable from a single chunk of the document. Questions that require combining information from multiple sections — comparisons, aggregations, summaries — will score lower than their actual retrieval quality. Multi-chunk question support is planned for a future version.
+
+**LLM-generated questions are optimistic.**
+Auto-generated questions are derived from the document's own vocabulary and structure. Absolute scores will be higher than you'd see with real user queries. chunk-norris is designed for relative comparison between chunking strategies — the ranking between strategies is reliable even if absolute scores are optimistic.
 
 **English-language documents.**
 BERT embeddings and NLTK sentence tokenisation are optimised for English. Other languages may produce degraded results, particularly for `SentenceChunker`.
@@ -106,9 +124,42 @@ On first use, `SentenceChunker` will automatically download a small NLTK model (
 
 ## Quick start
 
-### 1. Prepare your data
+### 1. Set up your environment
 
-Create `questions.json` with your questions and expected answers:
+Copy `.env.example` to `.env` and add your OpenAI key if you want to auto-generate questions:
+
+```bash
+cp .env.example .env
+# Edit .env and add: OPENAI_API_KEY=your-key-here
+```
+
+The OpenAI key is only needed for question generation — not for evaluation.
+
+### 2. Prepare your questions
+
+**Option A — auto-generate (recommended):**
+
+```python
+from chunk_norris import Norris, BertEmbedder
+from chunk_norris.llm.openai_llm import OpenAILLM
+from dotenv import load_dotenv
+
+load_dotenv()
+
+norris = Norris(embedder=BertEmbedder())
+questions = norris.generate_questions(
+    text=text,
+    llm=OpenAILLM(model="gpt-4o-mini-2024-07-18"),
+    n=20,
+)
+
+# Inspect before running — edit or filter as needed
+for q in questions:
+    print(q["question"])
+    print(q["expected_answer"])
+```
+
+**Option B — write your own:**
 
 ```json
 [
@@ -123,9 +174,9 @@ Create `questions.json` with your questions and expected answers:
 ]
 ```
 
-**Tip:** Write expected answers using the document's own vocabulary where possible — this gives the most accurate token recall scores. Avoid heavy paraphrasing.
+**Tip:** Write expected answers using the document's own vocabulary — this gives the most accurate scores. Avoid heavy paraphrasing.
 
-### 2. Run the evaluation
+### 3. Run the evaluation
 
 ```python
 import json
@@ -138,13 +189,10 @@ from chunk_norris import (
 with open("document.txt") as f:
     text = f.read()
 
-with open("questions.json") as f:
-    questions = json.load(f)
-
 norris = Norris(
     embedder=BertEmbedder(),
     top_k=3,
-    recall_threshold=0.75,  # chunk must contain 75% of answer tokens to be relevant
+    recall_threshold=0.75,
 )
 
 report = norris.run(
@@ -153,7 +201,7 @@ report = norris.run(
         FixedChunker(chunk_size=128, overlap=0.1),
         FixedChunker(chunk_size=256, overlap=0.1),
         ParagraphChunker(max_tokens=256),
-        SentenceChunker(sentences_per_chunk=5, overlap=1),
+        SentenceChunker(sentences_per_chunk=3, overlap=0),
         RecursiveChunker(chunk_size=256, overlap=0.1),
     ],
     questions=questions,
@@ -162,28 +210,24 @@ report = norris.run(
 report.compare()
 ```
 
-### 3. Use the results
+### 4. Use the results
 
 ```python
-# Print comparison table
+# Comparison table
 report.compare()
-# Chunker                                 Combined  Recall  Bert   NRel
-# ---                                     --------  ------  ----   ----
-# RecursiveChunker(chunk_size=256, ...)     0.8200  0.9100  0.730   2.3  <-- best
-# SentenceChunker(sentences_per_chunk=5)   0.7800  0.8800  0.680   2.1
-# FixedChunker(chunk_size=256, ...)        0.7400  0.8500  0.630   1.8
+# Chunker                                    Combined  Recall  Bert   NRel
+# ---                                        --------  ------  ----   ----
+# SentenceChunker(sentences_per_chunk=3)       0.8417  1.0000  0.689   1.1  <-- best
+# ParagraphChunker(max_tokens=256)             0.8072  0.9444  0.679   0.9
+# RecursiveChunker(chunk_size=256, ...)        0.7856  0.9833  0.593   1.1
 
-# Export full results
-report.to_excel("results.xlsx")   # multi-sheet workbook with all details
-report.to_json("results.json")    # machine-readable full export
+# Export
+report.to_excel("results.xlsx")   # Config 1, Config 2... tabs with full detail
+report.to_json("results.json")
 
-# Pipeline handoff — use the winner directly
+# Pipeline handoff
 best_chunker = report.best_chunker()
 chunks = best_chunker.chunk(text)
-print(f"Best strategy: {best_chunker}")
-print(f"Chunks produced: {len(chunks)}")
-
-# Pass to your vector store or RAG pipeline
 # vector_store.add(chunks)
 ```
 
@@ -191,30 +235,40 @@ print(f"Chunks produced: {len(chunks)}")
 
 ## Core concepts
 
+### Retrieval
+
+chunk-norris uses **hybrid search** by default — the same approach used by modern production RAG systems:
+
+| Component | Technical name | What it does |
+|---|---|---|
+| Semantic search | Dense retrieval | BERT embeddings + cosine similarity — handles synonyms and paraphrasing |
+| Keyword search | Sparse retrieval (BM25) | Term frequency matching — handles exact keywords and technical terms |
+| Fusion | Reciprocal Rank Fusion (RRF) | Combines both ranked lists without requiring score normalisation |
+
+Chunks that rank well in both lists score highest. Neither signal is ignored entirely.
+
 ### Metrics
 
-chunk-norris uses two complementary metrics to score each retrieved chunk against the expected answer:
+The two evaluation metrics mirror the two retrieval signals:
 
-| chunk-norris name | Research equivalent | Measures | Catches |
+| chunk-norris name | Research equivalent | Retrieval proxy | Measures |
 |---|---|---|---|
-| **Token recall** | Answer span coverage | Fraction of expected answer tokens present in chunk | Missing content, wrong section retrieved |
-| **Bert score** | Semantic similarity | Semantic similarity between chunk and expected answer | Noisy chunks, full-document chunks |
-| **Combined** | Recall@K signal | Average of both — primary ranking metric | Both failure modes |
-
-The primary question chunk-norris answers is a form of **Recall@K**: among the top K retrieved chunks, does at least one cover the gold answer span?  is this signal — it scores the best chunk in the retrieved set rather than averaging across all K.
+| **Answer span coverage** | Token recall | BM25 retrievability | Fraction of expected answer tokens present in chunk |
+| **Semantic focus** | Semantic similarity | Dense retrievability | Semantic similarity between chunk and expected answer |
+| **Combined** | Recall@K signal | Hybrid retrievability | Average of both — primary ranking metric |
 
 **Why two metrics?** They catch different failure modes:
 
 ```
 Full document as one chunk:
-  token_recall = 1.00  (contains everything — trivially true, span coverage is meaningless)
-  bert_score   = 0.10  (diluted by all other content — semantic focus fails)
-  combined     = 0.55  ← correctly penalised
+  answer span coverage = 1.00  (contains everything — trivially true)
+  semantic focus       = 0.10  (diluted by all other content)
+  combined             = 0.55  ← correctly penalised
 
 Perfect focused chunk:
-  token_recall = 1.00  (gold span fully covered)
-  bert_score   = 0.89  (focused on the answer topic)
-  combined     = 0.95  ← correctly rewarded
+  answer span coverage = 1.00  (gold span fully covered)
+  semantic focus       = 0.89  (focused on the answer topic)
+  combined             = 0.95  ← correctly rewarded
 ```
 
 ### Recall threshold
@@ -235,11 +289,10 @@ If `n_relevant` is always 0 across questions, lower your threshold. If `n_releva
 The quality of your evaluation depends on the quality of your questions. A few guidelines:
 
 - **Write questions that have a specific, locatable answer** in the document
-- **Use the document's vocabulary** in expected answers where possible — token recall depends on vocabulary match
-- **Avoid questions that require combining multiple sections** (planned for v2)
-- **Aim for 15-30 questions** that cover different sections of the document
-- Each expected answer should be **one to three sentences** — concise and factual
-- **Vary answer span length** — include short factual questions ("Who?", "When?") and longer explanatory ones ("How does X work?"). This naturally stress-tests different chunk sizes and gives a more complete picture of strategy performance across different question types
+- **Use the document's vocabulary** in expected answers where possible — answer span coverage depends on vocabulary match
+- **Avoid questions that require combining multiple sections** (planned for a future version)
+- **Aim for 15-30 questions** covering different sections of the document
+- **Vary answer span length** — mix short factual questions ("Who?", "When?") with longer explanatory ones ("How does X work?") to stress-test different chunk sizes
 
 ---
 
@@ -275,8 +328,8 @@ Splits on blank lines (`\n\n`). If a paragraph exceeds `max_tokens`, it falls ba
 
 ```python
 SentenceChunker(
-    sentences_per_chunk=5,   # sentences per chunk
-    overlap=1,               # sentences repeated from previous chunk
+    sentences_per_chunk=3,   # sentences per chunk
+    overlap=0,               # sentences repeated from previous chunk
 )
 ```
 
@@ -292,7 +345,7 @@ RecursiveChunker(
 )
 ```
 
-Tries separators in priority order — paragraphs first, then sentences, then words. Falls back to the next separator only when a piece still exceeds `chunk_size`. The most generally useful chunker for documents without a known structure.
+Tries separators in priority order — paragraphs first, then sentences, then words. Falls back to the next separator only when a piece still exceeds `chunk_size`.
 
 ---
 
@@ -307,7 +360,6 @@ from chunk_norris.embeddings.base import BaseEmbedder
 
 class MyEmbedder(BaseEmbedder):
     def embed(self, texts: list[str]) -> list[list[float]]:
-        # return one vector per text
         return my_model.encode(texts).tolist()
 
 norris = Norris(embedder=MyEmbedder())
@@ -317,20 +369,20 @@ norris = Norris(embedder=MyEmbedder())
 
 ## Project status
 
-chunk-norris is in active development. Current version: **0.1.0**
+chunk-norris is in active development. Current version: **0.2.0**
 
 ### What works now
 - Four chunking strategies: Fixed, Paragraph, Sentence, Recursive
-- Deterministic evaluation: token recall + bert score
+- Hybrid retrieval: semantic search + BM25 via Reciprocal Rank Fusion
+- Automatic question generation using an LLM (gpt-4o-mini recommended)
+- Deterministic evaluation: answer span coverage + semantic focus
 - Pipeline integration: `best_chunker()` returns the winner ready to use
-- Excel export with per-question, per-chunk detail
-- Pluggable embedder interface
+- Excel export with Config tabs, full chunker labels, and per-question detail
+- Pluggable embedder and LLM interfaces
 
-### Planned for v2
-- **Automatic question generation** — LLM generates Q&A pairs from the document so you don't need to write them manually
-- **Multi-chunk question support** — for questions that require combining information from multiple sections
-- **Optional LLM answer generation** — generate and inspect actual answers alongside retrieval scores
-- **More chunking strategies** — Semantic chunker, Markdown-aware chunker
+### Planned
+- Multi-chunk question support — for questions that require combining information from multiple sections
+- More chunking strategies — Semantic chunker, Markdown-aware chunker
 
 ---
 
@@ -340,6 +392,7 @@ Contributions are welcome. The most valuable contributions right now:
 
 - New chunking strategies (see `src/chunk_norris/chunkers/base.py` for the interface)
 - New embedding providers (see `src/chunk_norris/embeddings/base.py`)
+- New retrieval strategies (see `src/chunk_norris/retrieval/base.py`)
 - Bug reports with minimal reproducible examples
 
 Please write tests for any new code. Run the test suite before opening a PR:
@@ -348,6 +401,8 @@ Please write tests for any new code. Run the test suite before opening a PR:
 pip install chunk-norris[dev]
 pytest
 ```
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for full setup instructions.
 
 ---
 
