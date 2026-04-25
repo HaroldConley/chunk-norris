@@ -32,6 +32,7 @@ dependencies = [
     "sentence-transformers==5.3.0",
     "openpyxl==3.1.5",
     "nltk==3.9.4",
+    "openai==2.29.0",
 ]
 
 [project.optional-dependencies]
@@ -42,10 +43,11 @@ dependencies = [
 
 # pip install chunk-norris[dev]
 dev = [
-  "pytest==9.0.2",
-  "pytest-cov==7.1.0",
-  "ruff>=0.4",
-  "mypy>=1.9",
+    "pytest==9.0.2",
+    "pytest-cov==7.1.0",
+    "ruff>=0.4",
+    "mypy>=1.9",
+    "python-dotenv==1.2.2",
 ]
 
 [project.urls]

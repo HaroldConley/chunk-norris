@@ -1,6 +1,8 @@
 import json
 from pathlib import Path
 
+from dotenv import load_dotenv  # python-dotenv==1.2.2
+
 from chunk_norris import (
     Norris,
     BertEmbedder,
@@ -9,6 +11,10 @@ from chunk_norris import (
     SentenceChunker,
     RecursiveChunker,
 )
+
+# Load environment variables from .env file.
+# Copy .env.example to .env and fill in your API keys.
+load_dotenv()
 
 
 # ── Paths ─────────────────────────────────────────────────────────────────────
@@ -23,13 +29,26 @@ DATA_DIR = BASE_DIR / "sample_data"
 # DATA_DIR = BASE_DIR / "data"
 
 
-# ── Load data ─────────────────────────────────────────────────────────────────
+# ── Load document ─────────────────────────────────────────────────────────────
 
 with open(DATA_DIR / "document.txt", encoding="utf-8") as f:
     TEXT = f.read()
 
-with open(DATA_DIR / "questions.json", encoding="utf-8") as f:
-    QUESTIONS = json.load(f)
+
+# ── Questions ─────────────────────────────────────────────────────────────────
+
+# Option A — auto-generate using an LLM (requires OPENAI_API_KEY in .env)
+from chunk_norris.llm.openai_llm import OpenAILLM
+norris_gen = Norris(embedder=BertEmbedder())
+llm = OpenAILLM(model="gpt-4o-mini-2024-07-18")
+QUESTIONS = norris_gen.generate_questions(text=TEXT, llm=llm, n=20)
+# Optionally save for reuse:
+with open(DATA_DIR / "questions.json", "w", encoding="utf-8") as f:
+    json.dump(QUESTIONS, f, indent=2)
+
+# Option B — load from file (no LLM needed)
+# with open(DATA_DIR / "questions.json", encoding="utf-8") as f:
+#     QUESTIONS = json.load(f)
 
 
 # ── Run ───────────────────────────────────────────────────────────────────────

@@ -36,6 +36,11 @@ source .venv/bin/activate
 
 # 3. Install in editable mode with dev dependencies
 pip install -e ".[dev]"
+
+# 4. Set up environment variables
+cp .env.example .env
+# Edit .env and add your OPENAI_API_KEY
+# (only needed for automatic question generation)
 ```
 
 That's it. No database, no services, no API keys needed for the core library.

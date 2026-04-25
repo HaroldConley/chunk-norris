@@ -6,26 +6,34 @@ Evaluate and compare chunking strategies for RAG pipelines.
 Basic usage::
 
     from chunk_norris import Norris, BertEmbedder
-    from chunk_norris.chunkers import FixedChunker, ParagraphChunker
-    from chunk_norris.chunkers import SentenceChunker, RecursiveChunker
+    from chunk_norris.chunkers import FixedChunker, RecursiveChunker
+    from chunk_norris.llm.openai_llm import OpenAILLM
 
     norris = Norris(embedder=BertEmbedder())
 
+    # Option A — auto-generate questions (requires OPENAI_API_KEY in .env)
+    questions = norris.generate_questions(
+        text=TEXT,
+        llm=OpenAILLM(model="gpt-4o-mini-2024-07-18"),
+        n=20,
+    )
+
+    # Option B — provide your own questions
+    questions = [
+        {
+            "question": "What is the refund policy?",
+            "expected_answer": "Customers can request a refund within 30 days."
+        },
+    ]
+
     report = norris.run(
-        text="Your document text here...",
+        text=TEXT,
         chunkers=[
             FixedChunker(chunk_size=128, overlap=0.1),
             FixedChunker(chunk_size=256, overlap=0.1),
-            ParagraphChunker(max_tokens=256),
-            SentenceChunker(sentences_per_chunk=5, overlap=1),
             RecursiveChunker(chunk_size=256, overlap=0.1),
         ],
-        questions=[
-            {
-                "question": "What is the refund policy?",
-                "expected_answer": "Customers can request a refund within 30 days."
-            },
-        ]
+        questions=questions,
     )
 
     report.compare()
@@ -33,7 +41,7 @@ Basic usage::
 
     # Use the best chunker directly in your pipeline
     best_chunker = report.best_chunker()
-    chunks = best_chunker.chunk("Your document text here...")
+    chunks = best_chunker.chunk(TEXT)
 
 """
 
@@ -51,9 +59,9 @@ from chunk_norris.chunkers.recursive import RecursiveChunker
 from chunk_norris.embeddings.bert import BertEmbedder
 from chunk_norris.embeddings.base import BaseEmbedder, EmbeddingError
 
-# LLM support will return in a future version for optional answer generation:
-# from chunk_norris.llm.openai_llm import OpenAILLM
-# from chunk_norris.llm.base import BaseLLM, LLMError
+# --- llm ---
+from chunk_norris.llm.openai_llm import OpenAILLM
+from chunk_norris.llm.base       import BaseLLM, LLMError
 
 __all__ = [
     "__version__",
@@ -68,4 +76,8 @@ __all__ = [
     "BertEmbedder",
     "BaseEmbedder",
     "EmbeddingError",
+    # --- llm ---
+    "OpenAILLM",
+    "BaseLLM",
+    "LLMError",
 ]

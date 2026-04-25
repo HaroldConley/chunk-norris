@@ -50,3 +50,8 @@ nltk_data/
 # Experiment results exported to root (if running scripts from project root)
 results.json
 results.xlsx
+
+# Environment variables — never commit real API keys
+.env
+.env.local
+# .env.example is intentionally NOT ignored — it is committed as a template
